@@ -19,7 +19,7 @@ public class CategoryPlaceIt {
 	 * @param cat3
 	 */
 	public static void createOrUpdate(int id, String title, String description,
-			String cat1, String cat2, String cat3) {
+			String cat1, String cat2, String cat3, boolean isCompleted, String user) {
 		Entity placeIt = getPlaceIt(id);
 		if (placeIt == null) {
 			placeIt = new Entity(KIND, id);
@@ -30,6 +30,8 @@ public class CategoryPlaceIt {
 		placeIt.setProperty("cat1", cat1);
 		placeIt.setProperty("cat2", cat2);
 		placeIt.setProperty("cat3", cat3);
+		placeIt.setProperty("isCompleted", isCompleted);
+		placeIt.setProperty("user", user);
 
 		Util.persistEntity(placeIt);
 	}

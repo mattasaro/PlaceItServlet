@@ -21,7 +21,8 @@ public class LocationPlaceIt {
 	 * @param schedule
 	 */
 	public static void createOrUpdate(int id, String title, String description,
-			double latitude, double longitude, Date dueDate, int schedule) {
+			double latitude, double longitude, Date dueDate, int schedule, boolean isCompleted,
+			String user) {
 		Entity placeIt = getPlaceIt(id);
 		if (placeIt == null) {
 			placeIt = new Entity(KIND, id);
@@ -33,6 +34,8 @@ public class LocationPlaceIt {
 		placeIt.setProperty("longitude", longitude);
 		placeIt.setProperty("dueDate", dueDate);
 		placeIt.setProperty("schedule", schedule);
+		placeIt.setProperty("isCompleted", isCompleted);
+		placeIt.setProperty("user", user);
 
 		Util.persistEntity(placeIt);
 	}

@@ -78,13 +78,16 @@ public class CategoryPlaceItServlet extends BaseServlet {
 		String pCat1 = req.getParameter("cat1");
 		String pCat2 = req.getParameter("cat2");
 		String pCat3 = req.getParameter("cat3");
+		String pIsCompleted = req.getParameter("isCompleted");
+		String pUser = req.getParameter("user");
 
 		try {
 			// Convert parameters to native types
 			int id = Integer.parseInt(pId);
+			boolean isCompleted = Boolean.parseBoolean(pIsCompleted);
 
 			CategoryPlaceIt.createOrUpdate(id, pTitle, pDescription, pCat1,
-					pCat2, pCat3);
+					pCat2, pCat3, isCompleted, pUser);
 		} catch (Exception e) {
 			String msg = Util.getErrorMessage(e);
 			out.print(msg);

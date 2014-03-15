@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.Entity;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * This servlet responds to the request corresponding to LocationPlaceIt
@@ -83,6 +84,8 @@ public class LocationPlaceItServlet extends BaseServlet {
 		String pLatitude = req.getParameter("latitude");
 		String pLongitude = req.getParameter("longitude");
 		String pSchedule = req.getParameter("schedule");
+		String pIsCompleted = req.getParameter("isCompleted");
+		String pUser = req.getParameter("user");
 
 		try {
 			// Convert parameters to native types
@@ -92,9 +95,10 @@ public class LocationPlaceItServlet extends BaseServlet {
 			Double lat = Double.parseDouble(pLatitude);
 			Double lon = Double.parseDouble(pLongitude);
 			int schedule = Integer.parseInt(pSchedule);
+			boolean isCompleted = Boolean.parseBoolean(pIsCompleted);
 
 			LocationPlaceIt.createOrUpdate(id, pTitle, pDescription, lat, lon,
-					dueDate, schedule);
+					dueDate, schedule, isCompleted, pUser);
 		} catch (Exception e) {
 			String msg = Util.getErrorMessage(e);
 			out.print(msg);
